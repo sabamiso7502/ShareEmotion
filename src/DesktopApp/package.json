@@ -1,0 +1,35 @@
+{
+  "name": "share-emotion-desktop",
+  "version": "1.0.0",
+  "description": "Nuxt + Electron",
+  "author": "sabamiso7502 <j14411knct@gmail.com>",
+  "private": true,
+  "main": "main.js",
+  "build": {
+    "appId": "",
+    "directories": {
+      "buildResources": "static"
+    }
+  },
+  "scripts": {
+    "dev": "cross-env NODE_ENV=DEV electron .",
+    "build": "nuxt build && electron-builder"
+  },
+  "dependencies": {
+    "@aspnet/signalr": "^1.1.4",
+    "ajv": "^6.9.1",
+    "fs": "0.0.1-security",
+    "nuxt": "^2.12.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "cross-env": "^5.1.4",
+    "electron": "8.1.1",
+    "electron-builder": "^20.8.1",
+    "electron-devtools-installer": "^2.2.3",
+    "eslint": "^4.19.1",
+    "eslint-friendly-formatter": "^3.0.0",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-vue": "^4.0.0"
+  }
+}

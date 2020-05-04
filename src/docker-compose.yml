@@ -1,0 +1,24 @@
+version: '3'
+services:
+
+  api:
+    image: share-emotion-api-server
+    container_name: share-emotion-api-server
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Local"
+    build:
+      context: ./ApiServer
+      dockerfile: ./Api/Dockerfile
+
+  client:
+    command: npm run dev
+    volumes:
+      - ./WebClient:/app
+    ports:
+      - "8081:3000"
+    tty: true
+    build:
+      context: ./WebClient
