@@ -13,9 +13,11 @@
   "dependencies": {
     "axios": "^0.19.2",
     "nuxt": "^2.0.0",
+    "vue2-touch-events": "^2.2.1",
     "websocket": "^1.0.31"
   },
   "devDependencies": {
-    "@aspnet/signalr": "^1.1.4"
+    "@aspnet/signalr": "^1.1.4",
+    "@nuxtjs/vuetify": "^1.11.2"
   }
 }

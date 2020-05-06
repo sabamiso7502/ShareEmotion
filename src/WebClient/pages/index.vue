@@ -1,46 +1,70 @@
 <template>
 	<section class="container">
-		<div>
-      <input v-model="RoomNumber" placeholder="room number">
-      <input v-model="Emotion" placeholder="emotion">
-			<button v-on:click="sendEmotion">send</button>
-		</div>
+		<p class="display">{{groupNumber}}</p>
+		<v-btn v-on:click="pressedKey(1)" class="key" >1</v-btn>
+		<v-btn v-on:click="pressedKey(2)" class="key" >2</v-btn>
+		<v-btn v-on:click="pressedKey(3)" class="key" >3</v-btn>
+		<p></p>
+		<v-btn v-on:click="pressedKey(4)" class="key" >4</v-btn>
+		<v-btn v-on:click="pressedKey(5)" class="key" >5</v-btn>
+		<v-btn v-on:click="pressedKey(6)" class="key" >6</v-btn>
+		<p></p>
+		<v-btn v-on:click="pressedKey(7)" class="key" >7</v-btn>
+		<v-btn v-on:click="pressedKey(8)" class="key" >8</v-btn>
+		<v-btn v-on:click="pressedKey(9)" class="key" >9</v-btn>
+		<p></p>
+		<v-btn v-on:click="pressedKey(-1)" class="key" >←</v-btn>
+		<v-btn v-on:click="pressedKey(0)" class="key" >0</v-btn>
+		<v-btn v-on:click="toGroupPage" class="key" >→</v-btn>
+
 	</section>
 </template>
 <script>
-import axios from 'axios'
-import { HubConnectionBuilder, LogLevel } from '@aspnet/signalr'
-const connection = new HubConnectionBuilder()
-  .withUrl('http://localhost:3417/EmotionHub')
-  .configureLogging(LogLevel.Information)
-  .build()
-
-connection.start()
-
-connection.on("ReceiveMessage", (user, message) => {
-	const encodedMsg = `${user} says ${message}`;
-	console.log(encodedMsg);
-});
 
 export default {
 	data: function() {
 		return {
-			Emotion: "default",
-			RoomNumber: "11111"
+			groupNumber: "-----",
+			groupNumberMaxLength: 5,
+			back: -1,
+			index: 0
 		}
 	},
 	methods: {
-		sendEmotion() {
-		console.clear()
-		console.log("create emotion")
-		console.log("Emotion is " + this.Emotion)
-		console.log("RoomNumber is " + this.RoomNumber)
-		connection.invoke("SendMessage","user","message")
-		.catch(err => console.error(err));
-		this.Emotion = ""
+		pressedKey(keyValue) {
+			console.log("called pressed key")
+			console.log("keyValue is " + keyValue)
+			console.log("groupNumberLength is " + this.groupNumber.length)
+			if(keyValue == this.back) {
+				if(this.index < 0) {
+					return;
+				}
+				let array = this.groupNumber.split('')
+				array[this.index] = '-'
+				this.groupNumber = array.join('')
+				this.index--
+				if(this.index <= 0) {
+					this.index = 0
+				}
+			}else {
+				if(this.index >= this.groupNumberMaxLength){
+					return;
+				}
+				let array = this.groupNumber.split('')
+				array[this.index] = keyValue
+				this.groupNumber = array.join('')
+				this.index++
+				if(this.index >= this.groupNumberMaxLength){
+					this.index = this.groupNumberMaxLength - 1
+				}
+			}
+		},
+		toGroupPage() {
+			this.$router.push({ path: 'listener', query: { groupNumber: this.groupNumber } })
+		}
 	}
-  }
 }
-
-
 </script>
+
+<style>
+</style>

@@ -9,12 +9,14 @@ namespace Api.Controllers
 {
     [Route("api/[action]")]
     [ApiController]
-    public class RoomController : ControllerBase
+    public class GroupController : ControllerBase
     {
         [HttpPost]
-        public string CreateRoom()
+        public string CreateGroup()
         {
-            return "FIXED_ROOM_NUMBER";
+            // TODO 一意な数字列を生成し返す
+            const string FIXED_GROUP_NUMBER = "12345";
+            return FIXED_GROUP_NUMBER;
         }
     }
 }

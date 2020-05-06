@@ -1,8 +1,11 @@
 /*
-**  Nuxt
-*/
+ **  Nuxt
+ */
 const http = require('http')
-const { Nuxt, Builder } = require('nuxt')
+const {
+	Nuxt,
+	Builder
+} = require('nuxt')
 let config = require('./nuxt.config.js')
 config.rootDir = __dirname // for electron-builder
 // Init Nuxt.js
@@ -22,8 +25,8 @@ const _NUXT_URL_ = `http://localhost:${server.address().port}`
 console.log(`Nuxt working on ${_NUXT_URL_}`)
 
 /*
-** Electron
-*/
+ ** Electron
+ */
 let win = null // Current window
 const electron = require('electron')
 const path = require('path')
@@ -41,19 +44,28 @@ const newWin = () => {
 		}
 	})
 	win.maximize()
-	//win.setIgnoreMouseEvents(true, { forward: true })
+	win.setIgnoreMouseEvents(true, {
+		forward: true
+	})
 	win.on('closed', () => win = null)
 	if (config.dev) {
 		// Install vue dev tool and open chrome dev tools
-		const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer')
+		const {
+			default: installExtension,
+			VUEJS_DEVTOOLS
+		} = require('electron-devtools-installer')
 		installExtension(VUEJS_DEVTOOLS.id).then(name => {
 			console.log(`Added Extension:  ${name}`)
-			win.webContents.openDevTools()
+			//win.webContents.openDevTools()
 		}).catch(err => console.log('An error occurred: ', err))
 		// Wait for nuxt to build
 		const pollServer = () => {
 			http.get(_NUXT_URL_, (res) => {
-				if (res.statusCode === 200) { win.loadURL(_NUXT_URL_) } else { setTimeout(pollServer, 300) }
+				if (res.statusCode === 200) {
+					win.loadURL(_NUXT_URL_)
+				} else {
+					setTimeout(pollServer, 300)
+				}
 			}).on('error', pollServer)
 		}
 		pollServer()
