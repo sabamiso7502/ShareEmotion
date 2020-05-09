@@ -28,7 +28,8 @@ jobs:
       env:
         ECR_REGISTRY: ${{ secrets.DOCKERHUB_USERNAME }}
         ECR_REPOSITORY: share-emotion-web-client
-        IMAGE_TAG: ${{ github.sha }}
+        #IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG: latest 
       run: |
         # Build a docker container and
         # push it to ECR so that it can
