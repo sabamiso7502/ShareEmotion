@@ -17,7 +17,7 @@
           <v-btn icon>
             <v-icon>mdi-arrow-left</v-icon>
           </v-btn>
-          <v-card-title>エモ入力</v-card-title>
+          <v-card-title>12345</v-card-title>
           <v-spacer></v-spacer>
         </v-toolbar>
         <v-form class="pa-4 pt-6">
