@@ -1,6 +1,6 @@
 <template>
 	<v-app>
-		<section class="container" style="width:300px;text-align:center">
+		<section class="container" style="width:300px">
 			<p class="display" style="width:300px">{{groupNumber}}</p>
 			<v-card-actions v-for="option in options" :key="option" class="d-inline-flex">
 				<v-btn v-on:click="pressedKey(option)">{{ option }}</v-btn>
