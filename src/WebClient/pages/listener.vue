@@ -14,7 +14,7 @@
         <v-system-bar color="indigo darken-1"></v-system-bar>
         <v-spacer></v-spacer>
         <v-toolbar color="indigo lighten-1">
-          <v-btn icon>
+          <v-btn icon v-on:click="toTopPage">
             <v-icon>mdi-arrow-left</v-icon>
           </v-btn>
           <v-card-title>12345</v-card-title>

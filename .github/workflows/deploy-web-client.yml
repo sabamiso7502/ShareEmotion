@@ -23,14 +23,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-northeast-1
 
-    - name: Login to Docker Hub
-      id: login-ecr
-      uses: azure/docker-login@v1
-      with:
-        login-server: docker.io
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
@@ -42,6 +34,7 @@ jobs:
         # push it to ECR so that it can
         # be deployed to ECS.
         cd src/WebClient
+        docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG . -f ./Dockerfile
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
