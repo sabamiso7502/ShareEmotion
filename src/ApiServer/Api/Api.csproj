@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileRunArguments>-p 3417:80 </DockerfileRunArguments>
+    <DockerfileRunArguments>-p 3417:443 -v ~/.aspnet/https:/https </DockerfileRunArguments>
   </PropertyGroup>
 
   <ItemGroup>

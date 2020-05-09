@@ -22,8 +22,6 @@ namespace Api
 
         public IConfiguration Configuration { get; }
 
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -39,7 +37,6 @@ namespace Api
             });
             services.AddControllers();
             services.AddHealthChecks();
-
             services.AddSignalR();
         }
 
@@ -60,8 +57,8 @@ namespace Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHealthChecks("/health");
-                endpoints.MapHub<EmotionHub>("/EmotionHub");
+                endpoints.MapHealthChecks("/api/health");
+                endpoints.MapHub<EmotionHub>("/hub/emotion");
             });
         }
     }

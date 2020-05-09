@@ -19,5 +19,11 @@
   "devDependencies": {
     "@aspnet/signalr": "^1.1.4",
     "@nuxtjs/vuetify": "^1.11.2"
+  },
+  "config": {
+    "nuxt": {
+      "host": "0.0.0.0",
+      "port": "80"
+    }
   }
 }

@@ -1,10 +1,12 @@
-FROM node:10.14.1-alpine
+FROM node:14.2.0 AS build
+WORKDIR /src
+COPY . .
+RUN npm install
+RUN npm run build
+
+FROM node:14.2.0-alpine AS final
 
 WORKDIR /app
-
-RUN apk update && \
-#    apk add git && \
-    npm install -g npm && \
-    npm install -g vue-cli
-
-ENV HOST 0.0.0.0
+COPY --from=build /src .
+ENTRYPOINT ["npm", "start"]
+EXPOSE 80

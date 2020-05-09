@@ -1,33 +1,24 @@
 <template>
-	<section class="container">
-		<p class="display">{{groupNumber}}</p>
-		<v-btn v-on:click="pressedKey(1)" class="key" >1</v-btn>
-		<v-btn v-on:click="pressedKey(2)" class="key" >2</v-btn>
-		<v-btn v-on:click="pressedKey(3)" class="key" >3</v-btn>
-		<p></p>
-		<v-btn v-on:click="pressedKey(4)" class="key" >4</v-btn>
-		<v-btn v-on:click="pressedKey(5)" class="key" >5</v-btn>
-		<v-btn v-on:click="pressedKey(6)" class="key" >6</v-btn>
-		<p></p>
-		<v-btn v-on:click="pressedKey(7)" class="key" >7</v-btn>
-		<v-btn v-on:click="pressedKey(8)" class="key" >8</v-btn>
-		<v-btn v-on:click="pressedKey(9)" class="key" >9</v-btn>
-		<p></p>
-		<v-btn v-on:click="pressedKey(-1)" class="key" >←</v-btn>
-		<v-btn v-on:click="pressedKey(0)" class="key" >0</v-btn>
-		<v-btn v-on:click="toGroupPage" class="key" >→</v-btn>
-
-	</section>
+	<v-app>
+		<section class="container" style="width:300px;text-align:center">
+			<p class="display" style="width:300px">{{groupNumber}}</p>
+			<v-card-actions v-for="option in options" :key="option" class="d-inline-flex">
+				<v-btn v-on:click="pressedKey(option)">{{ option }}</v-btn>
+			</v-card-actions>
+		</section>
+	</v-app>
 </template>
-<script>
 
+<script>
 export default {
 	data: function() {
 		return {
 			groupNumber: "-----",
 			groupNumberMaxLength: 5,
-			back: -1,
-			index: 0
+			back: '←',
+			enter: '→',
+			index: 0,
+			options: ['7','8','9','4','5','6','1','2','3','←','0','→']
 		}
 	},
 	methods: {
@@ -46,7 +37,11 @@ export default {
 				if(this.index <= 0) {
 					this.index = 0
 				}
-			}else {
+			}
+			else if(keyValue == this.enter){
+				this.toGroupPage()
+			}
+			else {
 				if(this.index >= this.groupNumberMaxLength){
 					return;
 				}
@@ -65,6 +60,3 @@ export default {
 	}
 }
 </script>
-
-<style>
-</style>

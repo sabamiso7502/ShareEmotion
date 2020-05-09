@@ -18,7 +18,8 @@ services:
     volumes:
       - ./WebClient:/app
     ports:
-      - "8081:3000"
+      - "8081:80"
     tty: true
     build:
       context: ./WebClient
+      dockerfile: ./WebClient/DockerfileDev
