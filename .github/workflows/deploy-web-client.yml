@@ -27,7 +27,7 @@ jobs:
       id: login-ecr
       uses: azure/docker-login@v1
       with:
-        login-server: dockerhub.io
+        login-server: docker.io
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
