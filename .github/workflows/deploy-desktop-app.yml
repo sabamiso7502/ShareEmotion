@@ -22,6 +22,9 @@ jobs:
       - name: install packager
         run: npm -g -y install electron-packager
 
+      - name: change to workspace
+        run: cd src/DesktopApp
+
       - name: install library
         run: npm install
 
@@ -29,7 +32,7 @@ jobs:
         run: npm run build
 
       - name: Package
-        run: electron-packager ./src/DesktopApp app --platform=win32 --arch=x64 --electronVersion=8.1.1
+        run: electron-packager ./ app --platform=win32 --arch=x64 --electronVersion=8.1.1
 
       - name: Archive
         run: Compress-Archive -Path app-win32-x64/* -DestinationPath app-win32
