@@ -12,7 +12,20 @@
       "containerPort": "443",
       "hostPort": "443",
       "protocol": "tcp"
-    }]
+    }],
+    "environment": [{
+        "name": "ASPNETCORE_Kestrel__Certificates__Default__Password",
+        "value": "dev"
+      },
+      {
+        "name": "ASPNETCORE_Kestrel__Certificates__Default__Path",
+        "value": "/https/aspnetapp.pfx"
+      },
+      {
+        "name": "ASPNETCORE_URLS",
+        "value": "https://*:443;http://*:80"
+      }
+    ]
   }],
   "volumes": [],
   "networkMode": "awsvpc",
