@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import NicoJS from 'nicoJS'
+import NicoJS from '@/node_modules/nicojs'
 import WebSocket from '@/components/WebSocket.vue'
 
 export default {
