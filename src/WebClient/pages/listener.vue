@@ -1,13 +1,5 @@
 <template>
-
-    <!--section>
-        <v-btn v-on:click="toTopPage" class="key" >キャンセル</v-btn>
-        <v-btn v-on:click="sendEmotion">エモを共有する</v-btn>
-
-        <v-text-field v-model="Emotion" placeholder="えも～い" />
-    </!--section-->
-
-    <v-app>
+<v-app>
   <v-content>
     <v-container>
       <v-card class="mx-auto" style="max-width:500px">
@@ -28,7 +20,7 @@
           <v-divider></v-divider>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn>エモ～い</v-btn>
+            <v-btn v-on:click="sendEmotion">エモ～い</v-btn>
           </v-card-actions>
         </v-form>
       </v-card>
@@ -40,9 +32,7 @@
 <script>
 import { HubConnectionBuilder, LogLevel } from '@aspnet/signalr'
 const connection = new HubConnectionBuilder()
-  //.withUrl('https://localhost:3417/hub/emotion')
-  .withUrl('https://www.share-emotion-site.com:443/hub/emotion')
-  //.withUrl('http://www.share-emotion-site.com/hub/emotion')
+  .withUrl('https://www.share-emotion-site.com/hub/emotion')
   .configureLogging(LogLevel.Information)
   .build()
 
@@ -64,8 +54,8 @@ export default {
             this.Emotion = ""
         },
         toTopPage() {
-			this.$router.push({ path: '/'})
-		}
+            this.$router.push({ path: '/'})
+        }
     }
 }
 </script>
