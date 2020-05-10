@@ -4,6 +4,12 @@
 
 <script>
 export default {
+  data() {
+    return {
+      StyleObject: {
+      }
+    }
+  },
   props: {
     'text': String,
     'id': String

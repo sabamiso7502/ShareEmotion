@@ -37,11 +37,6 @@ export default {
 			let time = "time:" + new Date().getTime()
 			this.emotions.push({text: emotion,id: time})
 		},
-		clearEmotion() {
-			console.clear()
-			console.log("clear emotion")
-			this.emotions = []
-		},
 		afterEnter: function (el) {
 			this.emotions.splice(0, 1)
 			console.log("end anime")
@@ -62,14 +57,6 @@ export default {
 </script>
 
 <style scoped>
-.container {
-	/*
-	min-height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;*/
-}
 
 .enable-float {
 	float: right;
