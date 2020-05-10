@@ -70,9 +70,6 @@ export default {
 	align-items: center;
 	text-align: center;*/
 }
-.btn {
-	margin: 0 8px;
-}
 
 .enable-float {
 	float: right;

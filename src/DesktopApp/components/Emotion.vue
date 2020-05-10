@@ -1,5 +1,5 @@
 <template>
-    <div class="emotion enable-float" >{{text}}</div>    
+    <div class="emotion enable-float" style="font-size:48px;">{{text}}</div>
 </template>
 
 <script>

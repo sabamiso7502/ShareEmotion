@@ -16,11 +16,12 @@
           <v-text-field
             color="indigo lighten-5"
             label="エモ"
+            v-model="Emotion"
           ></v-text-field>
           <v-divider></v-divider>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn v-on:click="sendEmotion">エモ～い</v-btn>
+            <v-btn v-on:click="sendEmotion" v-bind:disabled="IsDisconnected" >エモ～い</v-btn>
           </v-card-actions>
         </v-form>
       </v-card>
@@ -31,17 +32,13 @@
 
 <script>
 import { HubConnectionBuilder, LogLevel } from '@aspnet/signalr'
-const connection = new HubConnectionBuilder()
-  .withUrl('https://www.share-emotion-site.com/hub/emotion')
-  .configureLogging(LogLevel.Information)
-  .build()
-
-connection.start()
 
 export default {
     data() {
         return {
-            Emotion: "えももも"
+            Emotion: "えももも",
+            IsDisconnected : true,
+            connection : null
         }
     },
     methods: {
@@ -49,13 +46,22 @@ export default {
             console.log("send emotion")
             let num = this.$route.query.groupNumber
             console.log("num = " + num)
-            connection.invoke("SendEmotion",num,this.Emotion)
+            this.connection.invoke("SendEmotion",num,this.Emotion)
             .catch(err => console.error(err));
             this.Emotion = ""
         },
         toTopPage() {
             this.$router.push({ path: '/'})
         }
+    },
+    created() {
+      this.connection = new HubConnectionBuilder()
+                        .withUrl('https://www.share-emotion-site.com:443/hub/emotion')
+                        .configureLogging(LogLevel.Information)
+                        .build()
+
+      this.connection.start()
+      .then( () => { console.log("connected test"); this.IsDisconnected=false})
     }
 }
 </script>
