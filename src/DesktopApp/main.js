@@ -37,7 +37,7 @@ const newWin = () => {
 		transparent: true,
 		frame: false,
 		resizable: false,
-		alwaysOnTop: true,
+		//alwaysOnTop: true,
 		webPreferences: {
 			nodeIntegration: false,
 			preload: `${__dirname}/preload.js`
@@ -47,6 +47,7 @@ const newWin = () => {
 	win.setIgnoreMouseEvents(true, {
 		forward: true
 	})
+	win.setAlwaysOnTop(true, "screen-saver")
 	win.on('closed', () => win = null)
 	if (config.dev) {
 		// Install vue dev tool and open chrome dev tools
@@ -56,6 +57,7 @@ const newWin = () => {
 		} = require('electron-devtools-installer')
 		installExtension(VUEJS_DEVTOOLS.id).then(name => {
 			console.log(`Added Extension:  ${name}`)
+			// 製品版はコメントアウトする
 			//win.webContents.openDevTools()
 		}).catch(err => console.log('An error occurred: ', err))
 		// Wait for nuxt to build

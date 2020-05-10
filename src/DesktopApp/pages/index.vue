@@ -1,65 +1,45 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
-
 <template>
-	<section class="container">
-		<div>
-			<transition-group v-on:after-enter="afterEnter">
-			  <emotion v-for="e in emotions" v-bind:key="e.id" :text="e.text" :id="e.id"></emotion>
-			</transition-group >
-		</div>
+	<div class="container">
+		<div id="nico"></div>
 		<ws @ReceiveEmotionEmit="createEmotion"></ws>
-	</section>
+	</div>
 </template>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
 
 <script>
-import Vue from 'vue'
-import Emotion from '@/components/Emotion.vue'
+import NicoJS from 'nicoJS'
 import WebSocket from '@/components/WebSocket.vue'
 
-const win = window.remote.getCurrentWindow()
 export default {
-	data: function() {
+	data() {
 		return {
-			emotions: []
+			nico: null
 		}
 	},
 	methods: {
-		onMouseEnter () {
-			//win.setIgnoreMouseEvents(false)
-		},
-        onMouseLeave () {
-			//win.setIgnoreMouseEvents(true, { forward: true })
-		},
 		createEmotion(emotion) {
-			console.clear()
 			console.log("create emotion")
-			let time = "time:" + new Date().getTime()
-			this.emotions.push({text: emotion,id: time})
-		},
-		afterEnter: function (el) {
-			this.emotions.splice(0, 1)
-			console.log("end anime")
-		},
-  },
-  components: {
-    'emotion': Emotion,
-	'ws': WebSocket
-  },
-   head: {
-    meta: [
-      { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
-	]
-   }
+			this.nico.send(emotion)
+		}
+	},
+	mounted() {
+		console.log("mounted")
+		this.nico = new NicoJS({
+				app: this.$el,
+				width: 1920,
+				height: 1080,
+				font_size: 50,
+				color: '#111',
+				speed: 20
+		})
+		this.nico.listen()
+		this.nico.loop(['88888','wwww','www'])
+	},
+	components: {
+		'ws': WebSocket
+	}
 }
-
 
 </script>
 
-<style scoped>
-
-.enable-float {
-	float: right;
-}
-
+<style>
 </style>

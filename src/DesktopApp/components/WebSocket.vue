@@ -14,8 +14,7 @@ export default {
   created() {
     console.log("ws created.")
     this.connection = new HubConnectionBuilder()
-    //.withUrl('http://localhost:3417/hub/emotion')
-    .withUrl('https://www.share-emotion-site.com/hub/emotion')
+    .withUrl('https://www.share-emotion-site.com:443/hub/emotion')
     .configureLogging(LogLevel.Information)
     .build()
 
