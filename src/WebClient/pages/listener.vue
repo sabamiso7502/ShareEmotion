@@ -12,18 +12,19 @@
           <v-card-title>君のエモを共有しよう</v-card-title>
           <v-spacer></v-spacer>
         </v-toolbar>
-        <v-form class="pa-4 pt-6">
+        <div class="pa-4 pt-6">
           <v-text-field
             color="indigo lighten-5"
             label="エモ"
             v-model="Emotion"
+            @keydown.enter="trigger"
           ></v-text-field>
           <v-divider></v-divider>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn v-on:click="sendEmotion" v-bind:disabled="IsDisconnected" >エモ～い</v-btn>
           </v-card-actions>
-        </v-form>
+        </div>
       </v-card>
     </v-container>
   </v-content>
@@ -49,6 +50,11 @@ export default {
             this.connection.invoke("SendEmotion",num,this.Emotion)
             .catch(err => console.error(err));
             this.Emotion = ""
+        },
+        trigger(event) {
+          if(event.keyCode !== 13) return
+          this.sendEmotion()
+          return
         },
         toTopPage() {
             this.$router.push({ path: '/'})
