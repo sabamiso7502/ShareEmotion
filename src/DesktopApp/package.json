@@ -18,7 +18,7 @@
   "dependencies": {
     "@aspnet/signalr": "^1.1.4",
     "ajv": "^6.9.1",
-    "electron": "^8.2.5",
+    "electron": "^18.3.7",
     "fs": "0.0.1-security",
     "nicojs": "^1.1.8",
     "node-gyp": "^6.1.0",
